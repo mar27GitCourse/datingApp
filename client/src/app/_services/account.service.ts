@@ -9,7 +9,7 @@ import { User } from '../_models/user';
 })
 export class AccountService {
   baseUrl = 'https://localhost:5001/api/';
-  private currentUserSource = new ReplaySubject<User>(1);//one user  ReplaySubject is a type of observable (kind of buffer)
+  private currentUserSource = new ReplaySubject<any>(1);//one user  ReplaySubject is a type of observable (kind of buffer)
   currentUser$ = this.currentUserSource.asObservable(); // use $ as convention
 
   constructor(private http: HttpClient) { }
@@ -44,6 +44,6 @@ export class AccountService {
 
   logout() {
     localStorage.removeItem('user');
-    this.currentUserSource.next(undefined);
+    this.currentUserSource.next(null);
   }
 }
